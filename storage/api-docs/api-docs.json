@@ -1,0 +1,371 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "School of Net - SON Financeiro API",
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "summary": "Requisitar token JWT",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "email": {
+                                    "description": "Requisitar token JWT",
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "description": "Requisitar token JWT",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token JWT"
+                    }
+                }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "summary": "Revogar token JWT",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                }
+            }
+        },
+        "/api/refresh_token": {
+            "post": {
+                "summary": "Renovar token JWT",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token JWT"
+                    }
+                }
+            }
+        },
+        "/api/bill_pays": {
+            "get": {
+                "summary": "Display a listing of the resource.",
+                "description": "Listar contas a pagar",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cole\u00e7\u00e3o de contas a pagar"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Store a newly created resource in storage.",
+                "description": "Criar conta a pagar",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "description": "Store a newly created resource in storage.",
+                                    "type": "string"
+                                },
+                                "date_due": {
+                                    "description": "Store a newly created resource in storage.",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "value": {
+                                    "description": "Store a newly created resource in storage.",
+                                    "type": "number"
+                                },
+                                "category_id": {
+                                    "description": "Store a newly created resource in storage.",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Conta a pagar criada"
+                    }
+                }
+            }
+        },
+        "/api/bill_pays/{id}": {
+            "get": {
+                "summary": "Display the specified resource.",
+                "description": "Listar uma conta a pagar",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Conta a pagar encontrada"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update the specified resource in storage.",
+                "description": "Atualizar conta a pagar",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "description": "Update the specified resource in storage.",
+                                    "type": "string"
+                                },
+                                "date_due": {
+                                    "description": "Update the specified resource in storage.",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "value": {
+                                    "description": "Update the specified resource in storage.",
+                                    "type": "number"
+                                },
+                                "category_id": {
+                                    "description": "Update the specified resource in storage.",
+                                    "type": "integer"
+                                },
+                                "done": {
+                                    "description": "Update the specified resource in storage.",
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Conta a pagar atualizada"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove the specified resource from storage.",
+                "description": "Excluir conta a pagar",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                }
+            }
+        },
+        "/api/categories": {
+            "get": {
+                "summary": "Display a listing of the resource.",
+                "description": "Listar categorias",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cole\u00e7\u00e3o de categorias"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Store a newly created resource in storage.",
+                "description": "Criar categoria",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "description": "Store a newly created resource in storage.",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Categoria criada"
+                    }
+                }
+            }
+        },
+        "/api/categories/{id}": {
+            "get": {
+                "summary": "Display the specified resource.",
+                "description": "Listar uma categoria",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Categoria encontrada"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update the specified resource in storage.",
+                "description": "Atualizar categoria",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "description": "Update the specified resource in storage.",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Categoria atualizada"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Remove the specified resource from storage.",
+                "description": "Excluir categoria",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Bearer __token__",
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {}
+}
